@@ -3,8 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class Customs {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final format = DateFormat("yyyy-MM-dd");
+  Customs(
+      {String name,
+      String email,
+      String password,
+      String temp,
+      DateTime dateTime,
+      Key key});
+
   String _name;
   String _email;
   String _password;
@@ -12,7 +18,7 @@ class Customs {
   DateTime _dateTime;
   bool isDateSelected = false;
   String birthDateInString;
-  Widget nameField() {
+  Widget customField() {
     return TextFormField(
       decoration: InputDecoration(
           fillColor: Colors.white54,

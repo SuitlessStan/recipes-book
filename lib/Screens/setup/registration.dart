@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:recipes_book/customs/name_field.dart';
 import '../../logistics/signingoogle.dart';
 import '../home.dart';
 import 'package:intl/intl.dart';
@@ -16,53 +17,80 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final format = DateFormat("yyyy-MM-dd");
-  String _name;
-  String _email;
-  String _password;
   String _temp;
-  DateTime _dateTime;
-  bool isDateSelected = false;
-  String birthDateInString;
 
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/registration.jpg"),
-                fit: BoxFit.cover)),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            margin: EdgeInsets.all(20),
-            child: Form(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Register",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                    ),
+    return GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/registration.jpg"),
+                    fit: BoxFit.cover)),
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Container(
+                margin: EdgeInsets.all(20),
+                child: Form(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
+                      ),
+                      SpacingHV(30, 0),
+                      CustomField(
+                        //Name field
+                        //Label
+                        labelText: "Enter name",
+                        fontSize: 14,
+                        //Label hint
+                        hintText: "Enter name",
+                        hintFontSize: 12,
+                        keyboardType: TextInputType.name,
+                      ),
+                      SpacingHV(10, 0),
+                      CustomField(
+                          //Password field
+                          //Label
+                          labelText: "Enter password",
+                          fontSize: 14,
+                          //Label hint
+                          hintText: "Enter password",
+                          hintFontSize: 12,
+                          onSaved: (String value) {
+                            if (value.isNotEmpty) {
+                              _temp = value;
+                            }
+                          }),
+                      SpacingHV(10, 0),
+                      CustomField(
+                        //Confirm password field
+                        //Label
+                        labelText: "Confirm password",
+                        fontSize: 14,
+                        //Label hint
+                        hintText: "Confirm password",
+                        hintFontSize: 12,
+                        onSaved: (String value) {
+                          if (value == _temp && value.isNotEmpty) {}
+                        },
+                      ),
+                      SpacingHV(10, 0),
+                      CustomField(),
+                      SpacingHV(10, 0),
+                      Container(),
+                      SpacingHV(10, 0),
+                      _signInButton(),
+                    ],
                   ),
-                  SpacingHV(30, 0),
-                  nameField(),
-                  SpacingHV(10, 0),
-                  emailField(),
-                  SpacingHV(10, 0),
-                  passwordField(),
-                  SpacingHV(10, 0),
-                  passwordConfirmField(),
-                  SpacingHV(10, 0),
-                  Container(),
-                  SpacingHV(10, 0),
-                  _signInButton(),
-                ],
+                ),
               ),
-            ),
-          ),
-        ));
+            )));
   }
 
   Widget SpacingHV(double height, double width) {
