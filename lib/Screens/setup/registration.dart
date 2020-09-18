@@ -32,72 +32,61 @@ class _RegistrationPageState extends State<RegistrationPage> {
               body: Container(
                 margin: EdgeInsets.all(20),
                 child: Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Register",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                          ),
                         ),
-                      ),
-                      SpacingHV(30, 0),
-                      CustomField(
-                        //Name field
-                        //Label
-                        labelText: "Enter name",
-                        fontSize: 14,
-                        //Label hint
-                        hintText: "Enter name",
-                        hintFontSize: 12,
-                        keyboardType: TextInputType.name,
-                      ),
-                      SpacingHV(10, 0),
-                      CustomField(
+                        SizedBox(height: 20),
+                        CustomTextField(
+                          //Name field
+                          //Label
+                          labelText: "Enter name",
+                          //Hint
+                          hintText: "Enter name",
+                        ),
+                        CustomTextField(
                           //Password field
                           //Label
                           labelText: "Enter password",
-                          fontSize: 14,
-                          //Label hint
+                          //Hint
                           hintText: "Enter password",
-                          hintFontSize: 12,
-                          onSaved: (String value) {
-                            if (value.isNotEmpty) {
-                              _temp = value;
-                            }
-                          }),
-                      SpacingHV(10, 0),
-                      CustomField(
-                        //Confirm password field
-                        //Label
-                        labelText: "Confirm password",
-                        fontSize: 14,
-                        //Label hint
-                        hintText: "Confirm password",
-                        hintFontSize: 12,
-                        onSaved: (String value) {
-                          if (value == _temp && value.isNotEmpty) {}
-                        },
-                      ),
-                      SpacingHV(10, 0),
-                      CustomField(),
-                      SpacingHV(10, 0),
-                      Container(),
-                      SpacingHV(10, 0),
-                      _signInButton(),
-                    ],
+                        ),
+                        CustomTextField(
+                          //Confirm password field
+                          //Label
+                          labelText: "Confirm password",
+                          //Hint
+                          hintText: "Confirm password",
+                        ),
+                        CustomTextField(
+                          //Select date of birth
+                          //Label
+                          labelText: "Date of birth",
+                          //Hint
+                          hintText: "Date of birth",
+                        ),
+                        CustomTextField(
+                          //Email field
+                          //Label
+                          labelText: "Enter email",
+                          //Hint
+                          hintText: "Enter email",
+                        ),
+                        _signInButton(),
+                      ],
+                    ),
                   ),
                 ),
               ),
             )));
-  }
-
-  Widget SpacingHV(double height, double width) {
-    return SizedBox(
-      height: height,
-      width: width,
-    );
   }
 
   Widget registerButton() {
@@ -147,6 +136,52 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final String hintText;
+  final String labelText;
+  final Function onSaved;
+  final Function onTap;
+  final Function onChanged;
+
+  const CustomTextField({
+    Key key,
+    this.hintText,
+    this.labelText,
+    this.onSaved,
+    this.onTap,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      //Name field
+      onSaved: (String savedSubmit) {},
+      decoration: InputDecoration(
+        //rounded Textfield
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        //Textfield color
+        fillColor: Colors.white24,
+        filled: true,
+        //Label
+        labelText: labelText,
+        labelStyle: TextStyle(
+          color: Colors.white60,
+          fontSize: 14,
+        ),
+        //Hint
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: Colors.white60,
+          fontSize: 14,
         ),
       ),
     );

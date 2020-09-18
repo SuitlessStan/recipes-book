@@ -14,6 +14,7 @@ class CustomField extends StatelessWidget {
   final Function onSaved;
   final Function onTap;
   final TextInputType keyboardType;
+  final InputDecoration decoration;
 
   const CustomField({
     Key key,
@@ -30,6 +31,7 @@ class CustomField extends StatelessWidget {
     this.onSaved,
     this.onTap,
     this.keyboardType,
+    this.decoration,
   }) : super(key: key);
 
   @override
